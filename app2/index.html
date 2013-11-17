@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="menume" ng-controller="AppCtrl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="description" content="Over 10,000 restraurants and bakeries choose to accept bitcoin with MenuMe.">
+    <title ng-bind="pageTitle">MenuMe Directory | MenuMe</title>
+
+  <!--  <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@BitPay">
+    <meta name="twitter:title" content="Bitcoin Directory">
+    <meta name="twitter:description" content="Over 10,000 restaurant and bakeries choose to accept bitcoin with MenuMe.">
+    <meta name="twitter:image:src" content="https://bitpay.com/img/logo.png">
+    <meta property="og:title" content="Bitcoin Directory | BitPay" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://BitPay.com/directory" />
+    <meta property="og:image" content="https://bitpay.com/img/logo.png" />-->
+    <meta property="og:description" content="Over 10,000 restaurant and bakeries choose to accept bitcoin with MenuMe.">
+
+    <link href='//fonts.googleapis.com/css?family=Ubuntu:300,400,700|Ubuntu+Condensed' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/menume/app2/css/bitpay-directory-0.1.0.css" />
+    <script type="text/javascript" src="/menume/app2/js/bitpay-directory-0.1.0.js"></script>
+    <link rel="shortcut icon" href="/menume/app2/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/menume/app2/favicon.ico" type="image/x-icon">
+  </head>
+  
+  <body>
+
+<div class="pure-g-r \{{menuState}}" id="layout">
+    
+    <a href="#" id="menuLink" class="pure-menu-link \{{menuState}}" ng-click="activateMenu()"><span></span>
+    </a>
+    <div class="pure-u" id="menu" class="\{{menuState}}">
+        <div class="pure-menu pure-menu-open">
+            <a class="pure-menu-heading" ng-click="scrollTo('top'); clearGroup()">MenuMe</a>
+
+            <ul>
+                <li>
+                    <a ng-click="focusOnSearch(); scrollTo('search'); clearGroup()">Search</a>
+                </li>
+                <!--<li>
+                    <a ng-click="showGroup('1')">Featured</a>
+                </li>-->
+                <li class="menu-item-divided">
+                    <a ng-click="scrollTo('search'); showGroup('2');" ng-class="{active: profileFilters.groups == '2'}">Vegetarian</a>
+                </li>
+                <li>
+                    <a ng-click="scrollTo('top'); showGroup('3')" ng-class="{active: profileFilters.groups == '3'}">Gluten-Free</a>
+                </li>
+                <!--<li>
+                    <a ng-click="scrollTo('search'); showGroup('4')" ng-class="{active: profileFilters.groups == '4'}">Travel &amp; Tourism</a>
+                </li>-->
+                <li>
+                    <a ng-click="scrollTo('top'); showGroup('5')" ng-class="{active: profileFilters.groups == '5'}">Low Carb</a>
+                </li>
+                <li>
+                    <a ng-click="scrollTo('search'); showGroup('6')" ng-class="{active: profileFilters.groups == '6'}">Chinese</a>
+                </li>
+                <li>
+                    <a ng-click="scrollTo('search'); showGroup('7')" ng-class="{active: profileFilters.groups == '7'}">Seafood</a>
+                </li>
+                <!--<li>
+                    <a ng-click="scrollTo('search'); showGroup('8')" ng-class="{active: profileFilters.groups == '8'}">Bitcoin Mining</a>
+                </li>-->
+                <!--<li>
+                    <a ng-click="scrollTo('search'); showGroup('9')" ng-class="{active: profileFilters.groups == '9'}">Medical &amp; Health</a>
+                </li>-->
+                <li>
+                    <a ng-click="scrollTo('top'); showGroup('10')" ng-class="{active: profileFilters.groups == '10'}">Low Calorie</a>
+                </li>
+                <li class="menu-item-divided">
+                    <a ng-click="scrollTo('search'); showGroup('11')" ng-class="{active: profileFilters.groups == '11'}">Gift Ideas</a>
+                </li>
+                <li>
+                    <a ng-click="scrollTo('top'); showGroup('12')" ng-class="{active: profileFilters.groups == '12'}">Non-Profits</a>
+                </li>
+                <li class="menu-item-divided">
+                    <a href="https://www.paypal.com/home" class="action-call">Accept Paypal</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="pure-u-1" id="main" ui-view="main">
+    <a id="top" class="ng-scope"></a>
+        <div class="wrapper center ng-scope">
+            <a href="#">
+                <img class="logo" src="/menume/app2/img/logo.png" onload="this.src'/menume/app2/img/logo.png'" onerror="this.onerror=null; this.src='/menume/app2/img/logo.png'" alt="menume">
+            </a>
+
+            <h1 class="title">
+                "Over 10,000 restaurant and bakeries" 
+                <a href="https://www.paypal.com/home">accept PayPal</a>
+                "with MenuMe."
+            </h1>
+            <h2 class="subtitle">Browse our favorite dishes.</h2>
+        </div>
+        <form class="pure-form ng-scope ng-pristine ng-valid">
+            <a id="search"></a>
+            <input class="pure-input-1 ng-pristine ng-valid" type="text" placeholder="Vegetarian..." id="search-input" ng-model="search" focus="$parent.focusSearch">
+            <br>
+        </form> 
+        <div class="wrapper ng-scope">
+        	<span ng-repeat= "profile in showingProfiles | filter:hasThumbnail | filter: groupFilter:true | filter:search" class="ng-scope">
+            <div class="profile" ng-click ="clickProfile($index)">
+                <img ng-src="/menume/app2/img/angular.jpg" class="profile-image" src="/menume/app2/img/angular.jpg">
+                <div class="profile-detail-wrapper">
+                    <div class="profile-title-wrapper">
+                    <h1 class="profile-title ng-binding">Angular Beef</h1>
+                    </div>
+                </div>
+            </div>
+         <!--   <div class="overlay-background ng-hide" ng-show="openProfile == $index" ng-click="closeProfile()"></div>
+           <div class="overlay-foreground ng-hide" ng-show="openProfile == $index">
+                <div class="more-info-wrapper">
+                    <div class="more-info">
+                        <a class="overlay-close" ng-click="closeProfile()">x</a>
+                        <h1 class="overlay-title ng-binding">Angular Beef</h1>
+                        <a href="#" target="_blank" class="overlay-image">
+                            <img ng-src="/menume/app2/img/angular.jpg" src= "/menume/app2/img/angular.jpg">
+                        </a>
+                        <p class="overlay-text ng-binding">Your favorite Angular Beef</p>
+                        <a href="#" class="pure-button" target ="_blank">More info   >></a>
+                        <div class="clear"></div>
+                    </div>
+                </div>-->
+        	</span>
+
+        	<span ng-repeat= "profile in showingProfiles | filter:hasThumbnail | filter: groupFilter:true | filter:search" class="ng-scope">
+            <div class="profile" ng-click ="clickProfile($index)">
+                <img ng-src="/menume/app2/img/angular.jpg" class="profile-image" src="/menume/app2/img/beans.jpg">
+                <div class="profile-detail-wrapper">
+                    <div class="profile-title-wrapper">
+                    <h1 class="profile-title ng-binding">Mexican Beans</h1>
+                    </div>
+                </div>
+            </div>
+           <!-- <div class="overlay-background ng-hide" ng-show="openProfile == $index" ng-click="closeProfile()"></div>
+            <!--<div class="overlay-foreground ng-hide" ng-show="openProfile == $index">
+                <div class="more-info-wrapper">
+                    <div class="more-info">
+                        <a class="overlay-close" ng-click="closeProfile()">x</a>
+                        <h1 class="overlay-title ng-binding">Mexican Beans</h1>
+                        <a href="#" target="_blank" class="overlay-image">
+                            <img ng-src="/menume/app2/img/angular.jpg" src= "/menume/app2/img/angular.jpg">
+                        </a>
+                        <p class="overlay-text ng-binding">Your favorite Mexican Beans</p>
+                        <a href="#" class="pure-button" target ="_blank">More info   >></a>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                </div>-->
+        	</span>
+	        <span ng-repeat= "profile in showingProfiles | filter:hasThumbnail | filter: groupFilter:true | filter:search" class="ng-scope">
+	            <div class="profile" ng-click ="clickProfile($index)">
+	                <img ng-src="/menume/app2/img/burgerama.jpg" class="profile-image" src="/menume/app2/img/burgerama.jpg">
+	                <div class="profile-detail-wrapper">
+	                    <div class="profile-title-wrapper">
+	                    <h1 class="profile-title ng-binding">Burger Rama</h1>
+	                    </div>
+	                </div>
+	            </div>
+	         </span>
+	         <span ng-repeat= "profile in showingProfiles | filter:hasThumbnail | filter: groupFilter:true | filter:search" class="ng-scope">
+	            <div class="profile" ng-click ="clickProfile($index)">
+	                <img ng-src="/menume/app2/img/currygalore.jpg" class="profile-image" src="/menume/app2/img/currygalore.jpg">
+	                <div class="profile-detail-wrapper">
+	                    <div class="profile-title-wrapper">
+	                    <h1 class="profile-title ng-binding">Curry Galore</h1>
+	                    </div>
+	                </div>
+	            </div>
+	         </span>
+
+	         <span ng-repeat= "profile in showingProfiles | filter:hasThumbnail | filter: groupFilter:true | filter:search" class="ng-scope">
+	            <div class="profile" ng-click ="clickProfile($index)">
+	                <img ng-src="/menume/app2/img/flavia.jpg" class="profile-image" src="/menume/app2/img/flavia.jpg">
+	                <div class="profile-detail-wrapper">
+	                    <div class="profile-title-wrapper">
+	                    <h1 class="profile-title ng-binding">Flavia</h1>
+	                    </div>
+	                </div>
+	            </div>
+	         </span>
+
+	         <span ng-repeat= "profile in showingProfiles | filter:hasThumbnail | filter: groupFilter:true | filter:search" class="ng-scope">
+	            <div class="profile" ng-click ="clickProfile($index)">
+	                <img ng-src="/menume/app2/img/superwonton.jpg" class="profile-image" src="/menume/app2/img/superwonton.jpg">
+	                <div class="profile-detail-wrapper">
+	                    <div class="profile-title-wrapper">
+	                    <h1 class="profile-title ng-binding">Super Wonton</h1>
+	                    </div>
+	                </div>
+	            </div>
+	         </span>
+
+	         <span ng-repeat= "profile in showingProfiles | filter:hasThumbnail | filter: groupFilter:true | filter:search" class="ng-scope">
+	            <div class="profile" ng-click ="clickProfile($index)">
+	                <img ng-src="/menume/app2/img/taqueria.jpg" class="profile-image" src="/menume/app2/img/taqueria.jpg">
+	                <div class="profile-detail-wrapper">
+	                    <div class="profile-title-wrapper">
+	                    <h1 class="profile-title ng-binding">Taqueria</h1>
+	                    </div>
+	                </div>
+	            </div>
+	         </span>
+
+
+	         <span ng-repeat= "profile in showingProfiles | filter:hasThumbnail | filter: groupFilter:true | filter:search" class="ng-scope">
+	            <div class="profile" ng-click ="clickProfile($index)">
+	                <img ng-src="/menume/app2/img/shandong.jpg" class="profile-image" src="/menume/app2/img/shandong.jpg">
+	                <div class="profile-detail-wrapper">
+	                    <div class="profile-title-wrapper">
+	                    <h1 class="profile-title ng-binding">Shandong Bunz</h1>
+	                    </div>
+	                </div>
+	            </div>
+	         </span>
+
+	         <span ng-repeat= "profile in showingProfiles | filter:hasThumbnail | filter: groupFilter:true | filter:search" class="ng-scope">
+	            <div class="profile" ng-click ="clickProfile($index)">
+	                <img ng-src="/menume/app2/img/tofuparadise.jpg" class="profile-image" src="/menume/app2/img/tofuparadise.jpg">
+	                <div class="profile-detail-wrapper">
+	                    <div class="profile-title-wrapper">
+	                    <h1 class="profile-title ng-binding">Tofu Paradise</h1>
+	                    </div>
+	                </div>
+	            </div>
+	         </span>
+
+	         <span ng-repeat= "profile in showingProfiles | filter:hasThumbnail | filter: groupFilter:true | filter:search" class="ng-scope">
+	            <div class="profile" ng-click ="clickProfile($index)">
+	                <img ng-src="/menume/app2/img/luigis.jpg" class="profile-image" src="/menume/app2/img/luigis.jpg">
+	                <div class="profile-detail-wrapper">
+	                    <div class="profile-title-wrapper">
+	                    <h1 class="profile-title ng-binding">Luigis Pizza</h1>
+	                    </div>
+	                </div>
+	            </div>
+	         </span>
+          </div>
+        </div> 
+      
+</div>
+
+
+  </body>
+</html>
